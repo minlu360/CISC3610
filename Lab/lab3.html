@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+
+    <h1>Notebook</h1>
+
+    <form action="/action_page.php">
+        <label for="title"> Title: </label>
+        <input type="text" id="title" name="title" maxlength="40" size="40" oninput="save()"><br><br>
+        <label for="box"> Notes: </label> <br>
+        <textarea id="box" rows="10" cols="80" oninput="save()">
+        </textarea>
+
+    </form>
+    <button id="button1" type="button" onclick="remove()">Clear</button></br>
+    <button id="button2" type="button" onclick="undo()">Undo</button>
+
+    <script>
+        var pre_t;
+        var pre_b;
+        function save() {
+            pre_t = localStorage.getItem("title");
+            pre_b = localStorage.getItem("box");
+            var t = document.getElementById("title").value;
+            var b = document.getElementById("box").value;
+
+            localStorage.setItem("title", t);
+            localStorage.setItem("box", b);
+
+        }
+        function restore() {
+
+            var a = localStorage.getItem("title");
+            var c = localStorage.getItem("box");
+            if (a != null) {
+                document.getElementById("title").value = a;
+            }
+            if (c != null) {
+                document.getElementById("box").value = c;
+            }
+            if (a == null && c == null) {
+                document.getElementById("title").value = " ";
+                document.getElementById("box").value = " ";
+            }
+        }
+        function remove() {
+            pre_t = localStorage.getItem("title");
+            pre_b = localStorage.getItem("box");
+            localStorage.removeItem("title");
+            localStorage.removeItem("box");
+            document.getElementById("title").value = " ";
+            document.getElementById("box").value = " ";
+        }
+
+
+        function undo() {
+            var cur_t;
+            var cur_b; 
+            if(pre_t != null) {
+                cur_t = localStorage.getItem("title");
+                document.getElementById("title").value = pre_t;
+                localStorage.setItem("title", pre_t);
+                pre_t = cur_t;
+            }
+            if(pre_b != null) {
+                cur_b = localStorage.getItem("box");
+                document.getElementById("box").value = pre_b;
+                localStorage.setItem("box", pre_b);
+                pre_b = cur_b;
+            }
+        }
+        restore();
+    </script>
+
+
+</body>
+
+</html>
