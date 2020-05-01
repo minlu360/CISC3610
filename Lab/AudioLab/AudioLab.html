@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Audio Lab </title>
+    <audio id="do">
+        <source src="audios/do.wav">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="re">
+        <source src="audios/re.wav">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="mi">
+        <source src="audios/mi.wav">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="fa">
+        <source src="audios/fa.wav">
+        Your browser does not support the audio element.
+    </audio>
+    <audio id="sol">
+        <source src="audios/sol.wav">
+        Your browser does not support the audio element.
+    </audio> <audio id="la">
+        <source src="audios/la.wav">
+        Your browser does not support the audio element.
+    </audio> <audio id="si">
+        <source src="audios/si.wav">
+        Your browser does not support the audio element.
+    </audio> <audio id="do+">
+        <source src="audios/do_octave.wav">
+        Your browser does not support the audio element.
+    </audio>
+</head>
+
+<body style="background-color:#b1e1e7">
+    <h1> Audio Lab </h1>
+    <div>
+        <button onclick="myFunction('do')"> Do </button>
+        <button onclick="myFunction('re')"> Re </button>
+        <button onclick="myFunction('mi')"> Mi </button>
+        <button onclick="myFunction('fa')"> Fa </button>
+        <button onclick="myFunction('sol')"> Sol </button>
+        <button onclick="myFunction('la')"> La </button>
+        <button onclick="myFunction('si')"> Si </button>
+        <button onclick="myFunction('do+')"> Do+ </button>
+    </div>
+
+    <script>
+        function myFunction(x) {
+            var audio = document.getElementById(x);
+            audio.play();
+        }
+    </script>
+    <footer style="position: fixed; left: 0; bottom: 0; width: 100%; text-align: center;">
+        <a href="https://minlu360.github.io/CISC3610/"> Back to Main Page </a>
+    </footer>
+</body>
+
+</html>
