@@ -62,7 +62,7 @@ class GameStart extends Phaser.Scene {
         this.germSpeed = 30;
 
         // texts
-        this.helpText = this.add.text(30, 510, "Press: 'H' for help, 'P' for pause, 'N' for new game, 'E' for end game", { font: "15px", fill: "#FFFFFF" });
+        this.helpText = this.add.text(30, 510, "Press: 'H': help, 'P': pause, 'N': new game, 'E': end game, 'B': back", { font: "15px", fill: "#FFFFFF" });
 
         // platforms
         var platforms = this.physics.add.staticGroup();
@@ -124,6 +124,8 @@ class GameStart extends Phaser.Scene {
         this.input.keyboard.on('keydown_P', this.pause, this);
         this.input.keyboard.on('keydown_N', this.newGame, this);
         this.input.keyboard.on('keydown_E', this.end, this);
+        this.input.keyboard.on('keydown_B', this.back, this);
+
 
         // collider in the game
         this.physics.add.collider(this.germs, platforms);
@@ -227,13 +229,21 @@ class GameStart extends Phaser.Scene {
         }
 
     }
+    // back to main 
+    back() {
+        if (this.state == -1) {
+            this.menuClick.play();
+            config.bgSound.stop();
+            this.scene.start('InitialInterface');
+        }
+    }
+
     // end game
     end() {
         if (this.state == -1) {
             this.menuClick.play();
             this.scene.start('GameEnd');
         }
-
     }
     // new game
     newGame() {

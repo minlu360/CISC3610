@@ -19,7 +19,7 @@ class GameEnd extends Phaser.Scene {
         this.menuClick = this.sound.add('menuClick');
         this.gameEnd = this.sound.add('end');
         this.gameEnd.play();
-        
+
         // background
         var menuBg = this.add.sprite(config.width / 2, config.height / 2, 'menuBg');
         menuBg.setScale(0.6);
@@ -33,17 +33,23 @@ class GameEnd extends Phaser.Scene {
 
         // text
         var style = { font: "20px", fill: "#000000", align: "center" };
-        if(config.hp == 0) {
-           this.add.text(305, 180, "You Lose", {font: "40px", fill: "#000000", align: "center"});
-           this.add.text(230, 230, "Press button below to replay", style)
+        if (config.hp == 0) {
+            this.add.text(305, 180, "You Lose", { font: "40px", fill: "#000000", align: "center" });
+            this.add.text(230, 230, "Press button below to replay", style);
+            this.add.text(290, 260, " Press 'B': back", style);
+
         }
         else {
-            this.add.text(220, 180, "Are you leaving?",  { font: "40px", fill: "#000000", align: "center" });
-            this.add.text(300, 230, "Hope you enjoy it",{ font: "20px", fill: "#000000", align: "center" })
+            this.add.text(220, 180, "Are you leaving?", { font: "40px", fill: "#000000", align: "center" });
+            this.add.text(300, 230, "Hope you enjoy it", style);
+            this.add.text(300, 260, " Press 'B': back", style);
+
         }
-    
+
+        this.input.keyboard.on('keydown_B', this.back, this);
+
         // button
-        var playBtn = this.add.image(400, 350, 'playBtn').setDepth(1);     
+        var playBtn = this.add.image(400, 350, 'playBtn').setDepth(1);
         playBtn.setScale(0.3);
 
         // when button pressed, back to game
@@ -51,8 +57,14 @@ class GameEnd extends Phaser.Scene {
         playBtn.on("pointerdown", function () {
             this.menuClick.play();
             this.scene.start('GameStart');
-        },this);
+        }, this);
 
     }
-    
+    // back to main
+    back() {
+        this.menuClick.play();
+        config.bgSound.stop();
+        this.scene.start('InitialInterface');
+    }
+
 }
